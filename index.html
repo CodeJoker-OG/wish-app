@@ -3,22 +3,36 @@
 <head>
   <style>
     body {
-background: #111;
-      color: white;
+      /* Blue → White gradient background */
+      background: linear-gradient(135deg, #4facfe, #ffffff);
+      background-size: 400% 400%;
+      animation: gradientShift 10s ease infinite;
+
       font-family: sans-serif;
       margin: 0;
-      height: 100vh; /* full screen height */
-      display: flex; 
-      justify-content: center; /* horizontal center */
-      align-items: center;     /* vertical center */
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
+
     .wish {
       font-size: 40px;
+      font-weight: bold;
+      color: #004080; /* Dark blue for good contrast */
       animation: float 3s ease-in-out infinite;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* makes it pop */
     }
+
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
   </style>
 </head>
