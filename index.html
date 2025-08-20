@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <title>Birthday Week - Day 3</title>
   <style>
     body {
-      /* Blue → White gradient background */
-      background: linear-gradient(135deg, #4facfe, #ffffff);
-      background-size: 400% 400%;
-      animation: gradientShift 10s ease infinite;
-
+      background: #111;
+      color: white;
       font-family: sans-serif;
       margin: 0;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
+      overflow: hidden;
     }
 
     .wish {
       font-size: 40px;
       font-weight: bold;
-      color: #004080; /* Dark blue for good contrast */
-      animation: float 3s ease-in-out infinite;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* makes it pop */
+      animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite;
+      text-align: center;
+      z-index: 10;
     }
 
     @keyframes float {
@@ -29,14 +30,123 @@
       50% { transform: translateY(-20px); }
     }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes glow {
+      0% { text-shadow: 0 0 10px #ff6b6b, 0 0 20px #ff6b6b, 0 0 30px #ff4757; color: #fff; }
+      50% { text-shadow: 0 0 20px #1e90ff, 0 0 40px #00f7ff, 0 0 60px #2ed573; color: #ffeaa7; }
+      100% { text-shadow: 0 0 10px #ff6b6b, 0 0 20px #ff6b6b, 0 0 30px #ff4757; color: #fff; }
+    }
+
+    /* Balloons */
+    .balloons {
+      position: absolute;
+      bottom: -150px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      pointer-events: none;
+    }
+
+    .balloon {
+      width: 60px;
+      height: 80px;
+      background: radial-gradient(circle at 30% 30%, #ff6b6b, #c0392b);
+      border-radius: 50%;
+      position: relative;
+      animation: floatUp 8s ease-in-out infinite;
+    }
+
+    .balloon:nth-child(2) {
+      background: radial-gradient(circle at 30% 30%, #6bcff6, #2980b9);
+      animation-delay: 2s;
+    }
+
+    .balloon:nth-child(3) {
+      background: radial-gradient(circle at 30% 30%, #6bf68c, #27ae60);
+      animation-delay: 4s;
+    }
+
+    .balloon::after {
+      content: "";
+      width: 2px;
+      height: 40px;
+      background: #aaa;
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    /* Confetti */
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 14px;
+      background: red;
+      top: -20px;
+      animation: fall linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0); }
+      100% { transform: translateY(110vh) rotate(360deg); }
+    }
+
+    /* Party popper sparkles */
+    .sparkle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: yellow;
+      animation: sparkle 1s ease-out infinite;
+    }
+
+    @keyframes sparkle {
+      0% { transform: scale(0.5) translate(0,0); opacity: 1; }
+      100% { transform: scale(0) translate(var(--x), var(--y)); opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <h1 class="wish">🎉 Happy second day of your birthday week!🥳 🎉</h1>
+<h1 class="wish"> Final Day - Buckle Up for Celebration! <br>🎉Tomorrow is the Big Day 🎉</h1>
+
+  <!-- Balloons -->
+  <div class="balloons">
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+  </div>
+
+  <!-- Confetti & Sparkles -->
+  <script>
+    // Generate confetti
+    for (let i = 0; i < 50; i++) {
+      let confetti = document.createElement("div");
+      confetti.className = "confetti";
+      document.body.appendChild(confetti);
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.background = ["#ff4757", "#1e90ff", "#2ed573", "#ffa502", "#ffffff"][Math.floor(Math.random()*5)];
+      confetti.style.animationDuration = (3 + Math.random() * 3) + "s";
+      confetti.style.animationDelay = Math.random() * 5 + "s";
+    }
+
+    // Generate sparkles (party popper effect)
+    for (let i = 0; i < 20; i++) {
+      let sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+      sparkle.style.setProperty("--x", (Math.random() * 200 - 100) + "px");
+      sparkle.style.setProperty("--y", (Math.random() * 200 - 100) + "px");
+      sparkle.style.left = "50%";
+      sparkle.style.top = "50%";
+      sparkle.style.animationDelay = (Math.random() * 1) + "s";
+      document.body.appendChild(sparkle);
+    }
+  </script>
 </body>
 </html>
